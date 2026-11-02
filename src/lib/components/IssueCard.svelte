@@ -3,56 +3,32 @@
     let { issue } = $props();
 </script>
 
-<div class="issue">
-    <div class="header">
-        <h3>{issue.title}</h3>
-        <span class="priority">{issue.priority}</span>
+<div class="bg-white p-4 rounded-xl border border-gray-200 shadow-sm mb-3">
+    <div class="flex justify-between items-center gap-2">
+        <h3 class="font-semibold text-gray-900">
+            {issue.title}
+        </h3>
+
+        <span class="bg-gray-100 text-gray-600 px-2 py-1 rounded-md text-xs">
+            {issue.priority}
+        </span>
     </div>
 
-    <p>{issue.description}</p>
+    <p class="text-gray-600 text-sm mt-3">
+        {issue.description}
+    </p>
 
-    <div class="info">
-        <p>Created: {issue.creationDate}</p>
-        <p>Due: {issue.dueDate}</p>
-        <p>Story Points: {issue.storyPoints}</p>
+    <div class="border-t border-gray-100 mt-4 pt-3 space-y-2">
+        <p class="text-gray-500 text-sm">
+            Created: {issue.creationDate}
+        </p>
+
+        <p class="text-gray-500 text-sm">
+            Due: {issue.dueDate}
+        </p>
+
+        <p class="text-gray-500 text-sm">
+            Story Points: {issue.storyPoints}
+        </p>
     </div>
 </div>
-
-<style>
-    .issue {
-        background: white;
-        padding: 16px;
-        border-radius: 10px;
-        margin-bottom: 12px;
-        border: 1px solid #e5e5e5;
-    }
-
-    .header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
-
-    h3 {
-        margin: 0;
-        font-size: 17px;
-    }
-
-    p {
-        color: #555;
-        font-size: 14px;
-    }
-
-    .priority {
-        background: #f0f0f0;
-        padding: 4px 8px;
-        border-radius: 5px;
-        font-size: 12px;
-    }
-
-    .info {
-        border-top: 1px solid #eee;
-        margin-top: 12px;
-        padding-top: 8px;
-    }
-</style>
