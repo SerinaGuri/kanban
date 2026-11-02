@@ -1,6 +1,10 @@
-
 <script>
-    let { issue } = $props();
+    import { format, parseISO, isBefore, startOfDay } from 'date-fns';
+
+    let { issue, exportICS, shareIssue } = $props();
+    let isOverdue = $derived(
+        isBefore(parseISO(issue.dueDate), startOfDay(new Date()))
+    );
 </script>
 
 <div class="bg-white p-4 rounded-xl border border-gray-200 shadow-sm mb-3">
@@ -19,16 +23,30 @@
     </p>
 
     <div class="border-t border-gray-100 mt-4 pt-3 space-y-2">
-        <p class="text-gray-500 text-sm">
-            Created: {issue.creationDate}
-        </p>
+     <p class="text-gray-500 text-sm">
+    Created: {format(parseISO(issue.creationDate), 'dd.MM.yyyy')}
+</p>
 
-        <p class="text-gray-500 text-sm">
-            Due: {issue.dueDate}
-        </p>
-
+<p class={isOverdue ? 'text-red-600 text-sm font-semibold' : 'text-gray-500 text-sm'}>
+    Due: {format(parseISO(issue.dueDate), 'dd.MM.yyyy')}
+    {#if isOverdue}
+        — Overdue!
+    {/if}
+</p>
         <p class="text-gray-500 text-sm">
             Story Points: {issue.storyPoints}
         </p>
     </div>
+    <button
+    onclick={() => exportICS(issue)}
+    class="mt-3 text-sm text-blue-600 hover:text-blue-800"
+>
+    Export to Calendar
+</button>
+<button
+    onclick={() => shareIssue(issue)}
+    class="mt-2 text-sm text-blue-600 hover:text-blue-800"
+>
+    Share Issue
+</button>
 </div>
